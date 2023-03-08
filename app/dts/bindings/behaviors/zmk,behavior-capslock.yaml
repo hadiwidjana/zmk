@@ -1,0 +1,26 @@
+# Copyright (c) 2021 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+description: Caps word behavior
+
+compatible: "zmk,behavior-capslock"
+
+include: zero_param.yaml
+
+properties:
+  enable-on-press:
+    type: boolean
+  disable-on-release:
+    type: boolean
+  disable-on-next-release:
+    type: boolean
+  disable-on-keys:
+    type: array
+    required: false
+    default: []
+  bindings:
+    type: phandle-array
+    required: true
+  binding-hold-time:
+    type: int
+    default: 95
