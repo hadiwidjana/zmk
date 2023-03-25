@@ -9,6 +9,9 @@ config ZMK_MOUSE_TICK_DURATION
     int "Mouse tick duration in ms"
     default 8
 
+menuconfig ZMK_MOUSE_PS2
+	bool "Enable PS/2 mouse support"
+
 if ZMK_MOUSE
 
 choice ZMK_MOUSE_WORK_QUEUE
