@@ -38,4 +38,16 @@ config ZMK_MOUSE_DEDICATED_THREAD_PRIORITY
 
 endif # ZMK_MOUSE_WORK_QUEUE_DEDICATED
 
-endif
+endif # ZMK_MOUSE
+
+if ZMK_MOUSE_PS2
+
+config ZMK_MOUSE_PS2_INVERT_X
+    bool "Invert the mouse movement x axis."
+	default n
+
+config ZMK_MOUSE_PS2_INVERT_Y
+    bool "Invert the mouse movement y axis."
+	default n
+
+endif # ZMK_MOUSE_PS2s
