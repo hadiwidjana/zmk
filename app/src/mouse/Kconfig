@@ -1,6 +1,8 @@
 # Copyright (c) 2021 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
+DT_COMPAT_ZMK_PS2_MOUSE := zmk,ps2-mouse
+
 menuconfig ZMK_MOUSE
     bool "Enable ZMK mouse emulation"
     default n
@@ -36,6 +38,15 @@ config ZMK_MOUSE_DEDICATED_THREAD_PRIORITY
 endif # ZMK_MOUSE_WORK_QUEUE_DEDICATED
 
 endif # ZMK_MOUSE
+
+config ZMK_MOUSE_PS2
+	bool
+	default $(dt_compat_enabled,$(DT_COMPAT_ZMK_PS2_MOUSE))
+    depends on (!ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL)
+	select ZMK_MOUSE
+    select PS2
+
+if ZMK_MOUSE_PS2
 
 config ZMK_MOUSE_PS2_SAMPLING_RATE
     int "Sets how many mouse activity reports should be sent per second. The default is 100. You can reduce this setting if you see a lot of PS/2 transmission errors. Increasing it will not lead to significant improvements, because mouse reports are accumulated and only sent over bluetooth every `CONFIG_ZMK_MOUSE_TICK_DURATION` ms."
@@ -76,3 +87,5 @@ config ZMK_MOUSE_PS2_TP_INVERT_Y
 config ZMK_MOUSE_PS2_TP_SWAP_XY
     bool "Swaps the x and y axis on the trackpoint. This is sets the swap settingin the trackpoint firmware and should therefore correctly impact the trackpoint algorithms. But this setting is not supported by all trackpoints."
 	default n
+
+endif # ZMK_MOUSE_PS2
